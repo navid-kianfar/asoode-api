@@ -1,15 +1,29 @@
-import { Body, Controller, Post } from '@nestjs/common';
-import { SigninRequest, SignupRequest } from 'asoode-common';
+import { Body, Controller, HttpCode, Post } from '@nestjs/common';
+import {
+  OperationResult,
+  SigninRequest,
+  SigninResponse,
+  SignupRequest,
+  SignupResponse,
+} from 'asoode-common';
 import { AccountService } from './account.service';
 
 @Controller('account')
 export class AccountController {
   constructor(private readonly accountService: AccountService) {}
 
-  @Post('signin') async signin(@Body() model: SigninRequest) {
+  @Post('signin')
+  @HttpCode(200)
+  async signin(
+    @Body() model: SigninRequest,
+  ): Promise<OperationResult<SigninResponse>> {
     return await this.accountService.signin(model);
   }
-  @Post('signup') async signup(@Body() model: SignupRequest) {
+  @Post('signup')
+  @HttpCode(200)
+  async signup(
+    @Body() model: SignupRequest,
+  ): Promise<OperationResult<SignupResponse>> {
     return await this.accountService.signup(model);
   }
   // @Post('forgot') async forgot(@Body() request: ForgotRequest) {}

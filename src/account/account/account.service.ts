@@ -6,13 +6,70 @@ import {
   SignupResponse,
   OperationResult,
 } from 'asoode-common';
+import { AccountRepositoryService } from './account-repository.service';
+import { UserDto } from './dtos';
 
 @Injectable()
 export class AccountService {
-  async signin(
-    model: SigninRequest,
-  ): Promise<OperationResult<SigninResponse>> {throw new Error();}
-  async signup(
-    model: SignupRequest,
-  ): Promise<OperationResult<SignupResponse>> { throw new Error(); }
+
+  constructor(
+    private readonly repository: AccountRepositoryService
+  ) {
+  }
+
+  async generate_token(user: UserDto): Promise<string> {
+    return 'TOKEN:13456789';
+  }
+  async hash(input: string): Promise<string> {
+    return input;
+  }
+  async verify_hash(input: string, hash: string): Promise<boolean> {
+    const computed = await this.hash(input);
+    return computed == hash;
+  }
+
+  async signin(model: SigninRequest): Promise<OperationResult<SigninResponse>> {
+    const valid = this.validate_auth_model(model);
+    if (!valid) {
+      return OperationResult.failed();
+    }
+
+    const user = await this.repository.get_by_username(model.username);
+    if (!user) {
+      return OperationResult.failed();
+    }
+    const verified = await this.verify_hash(model.password, user.hash);
+    if (!verified) {
+      return OperationResult.failed();
+    }
+    const token = await this.generate_token(user);
+    return OperationResult.success({ token });
+  }
+  async signup(model: SignupRequest): Promise<OperationResult<SignupResponse>> {
+    const valid = this.validate_auth_model(model);
+    if (!valid) {
+      return OperationResult.failed();
+    }
+
+    const exists = await this.repository.username_exists(model.username);
+    if (exists) {
+      return OperationResult.failed();
+    }
+
+    const hash = await this.hash(model.password);
+    const user = await this.repository.create_user(model, hash);
+    if (!user) {
+      return OperationResult.failed();
+    }
+
+    const token = await this.generate_token(user);
+    return OperationResult.success({ token });
+  }
+
+  private validate_auth_model(model: SignupRequest | SigninRequest): boolean {
+    model.username = (model.username || '').trim();
+    model.password = (model.password || '').trim();
+
+    return model.password.length > 0 && model.username.length > 0;
+  }
 }
