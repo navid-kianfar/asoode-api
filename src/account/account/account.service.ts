@@ -7,12 +7,12 @@ import {
   OperationResult,
   AccountErrors,
 } from 'asoode-common';
-import { AccountRepositoryService } from './repository.service';
 import { UserDto } from './dtos';
+import { AccountDataAccessService } from '../../data-access/repositories/account.repo';
 
 @Injectable()
 export class AccountService {
-  constructor(private readonly repository: AccountRepositoryService) {}
+  constructor(private readonly repository: AccountDataAccessService) {}
 
   async generate_token(user: UserDto): Promise<string> {
     return 'TOKEN:13456789';

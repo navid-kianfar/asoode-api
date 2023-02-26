@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { ConfigModule } from '@nestjs/config';
+import { AccountDataAccessService } from './repositories/repository.service';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -18,5 +19,6 @@ import { ConfigModule } from '@nestjs/config';
       synchronize: true,
     }),
   ],
+  providers: [AccountDataAccessService],
 })
 export class DataAccessModule {}

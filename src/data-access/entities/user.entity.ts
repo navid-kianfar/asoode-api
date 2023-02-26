@@ -6,6 +6,7 @@ import {
   UpdateDateColumn,
   DeleteDateColumn,
 } from 'typeorm';
+import { UserDto } from '../../account/account/dtos';
 
 @Entity()
 export class User {
@@ -18,4 +19,12 @@ export class User {
   @CreateDateColumn() created_at: Date;
   @UpdateDateColumn() updated_at?: Date;
   @DeleteDateColumn() deleted_at?: Date;
+
+  toDto(): UserDto {
+    return {
+      username: this.username,
+      hash: this.hash,
+      id: this.id,
+    };
+  }
 }
