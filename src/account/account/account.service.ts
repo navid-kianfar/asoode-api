@@ -7,7 +7,7 @@ import {
   OperationResult,
   AccountErrors,
 } from 'asoode-common';
-import { AccountRepositoryService } from './account-repository.service';
+import { AccountRepositoryService } from './repository.service';
 import { UserDto } from './dtos';
 
 @Injectable()
