@@ -10,8 +10,6 @@ import {
 import { UserDto } from './dtos';
 import { AccountDataAccessService } from '../../data-access/repositories/account.repo';
 
-import * as X from 'asoode-common';
-
 @Injectable()
 export class AccountService {
   constructor(private readonly repository: AccountDataAccessService) {}
