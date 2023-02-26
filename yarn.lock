@@ -1432,10 +1432,10 @@ asap@^2.0.0:
   resolved "https://registry.yarnpkg.com/asap/-/asap-2.0.6.tgz#e50347611d7e690943208bbdafebcbc2fb866d46"
   integrity sha512-BSHWgDSAiKs50o2Re8ppvp3seVHXSRM44cdSsT9FfNEUUZLOGWVCsiWaRPWM1Znn+mqZ1OfVZ3z3DWEzSp7hRA==
 
-asoode-common@^0.0.7:
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/asoode-common/-/asoode-common-0.0.7.tgz#911adb7e2e83e6384c9fab10adfb4f5a32adb6f6"
-  integrity sha512-efCN08UC5qepyoz3Rqjn1IwQ6s/i8sf1BKsesbVN+FwBmDsbyc42zeoXXqs8wciDcyXxxgUkn3N88VBJ7SpaCw==
+asoode-common@^0.0.8:
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/asoode-common/-/asoode-common-0.0.8.tgz#c8ab3a9c1f25506c8463cbb72d5bec080a142fe9"
+  integrity sha512-jb7BPhPAOkSkXdu53+xsSFlvGag+WyfnGRy+E0LjDAhPOYxVNwkjoFe0W1Y23jOiqJ0KbfbPEoH3UDbsDbEPsQ==
 
 asynckit@^0.4.0:
   version "0.4.0"
